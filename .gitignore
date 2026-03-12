@@ -1,4 +1,18 @@
 .venv
+# Migrações do Django
+*/migrations/*.py
+!*/migrations/__init__.py
+*/migrations/*.pyc
+# Migrations
+migrations/
+*/migrations/
+**/migrations/*.py
+!**/migrations/__init__.py
+**/migrations/*.pyc
+
+# Banco de dados SQLite (se estiver usando)
+*.sqlite3
+db.sqlite3
 
 *.log
 *.pot
