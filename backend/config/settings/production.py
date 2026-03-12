@@ -1,5 +1,6 @@
 # config/settings/production.py
 from .base import *  # noqa
+from decouple import config
 
 DEBUG = False
 

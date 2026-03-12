@@ -1,5 +1,5 @@
 # config/settings/development.py
-from .base import *  # noqa — importa tudo do base
+from .base import DATABASES
 
 DEBUG = True
 
