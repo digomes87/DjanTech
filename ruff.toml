@@ -1,0 +1,2 @@
+[lint]
+ignore = ["ARG001", "ARG002"]
