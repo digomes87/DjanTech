@@ -1,4 +1,5 @@
 # config/settings/development.py
+from .base import *  # noqa
 from .base import DATABASES
 
 DEBUG = True

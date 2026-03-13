@@ -64,6 +64,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_admin_user(self):
         return self.role == self.Role.ADMIN
-
-
-# Create your models here.
