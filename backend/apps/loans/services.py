@@ -86,7 +86,6 @@ class LoanApplicationService:
 
         from apps.loans.tasks import (
             run_credit_check_task,
-            send_application_submitted_notification,
         )
 
         if application.applicant != submitted_by:
