@@ -113,4 +113,18 @@ class LoanApplicantionCreateSerializer(serializers.Serializer):
         return value
 
 
-class LoanApplicationApproveSerializer(serializers.Serializer): ...
+class LoanApplicationApproveSerializer(serializers.Serializer):
+    approved_amount = serializers.DecimalField(max_digits=12, decimal_places=2)
+    investment_percentage = serializers.DecimalField(max_digits=5, decimal_places=2)
+    notes = serializers.CharField(require=False, allow_blank=True)
+
+    def validate_investment_percentage(self, value: Decimal) -> Decimal:
+        if not (Decimal("1") <= value <= Decimal("50")):
+            raise serializers.ValidationError(
+                "Investment percetange must be between 1% and 50%."
+            )
+        return value
+
+
+class LoanApplicationRejectSerializer(serializers.Serializer):
+    reason = serializers.CharField(min_length=10)
