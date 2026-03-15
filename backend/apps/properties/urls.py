@@ -1,3 +1,8 @@
-from django.urls import path, include
+from apps.properties.views import PropertyViewSet
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from apps.properties.views impor
+
+router = DefaultRouter()
+router.register(r"", PropertyViewSet, basename="property")
+
+urlpatterns = [path("", include(router.urls))]
