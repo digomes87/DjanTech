@@ -8,6 +8,7 @@ from core.exceptions import (
 )
 from django.contrib.auth import get_user_model
 from django.db import transaction
+from django.utils import timezone
 
 from backend.core.exceptions.handlers import InvalidStatusTransition
 
@@ -83,6 +84,11 @@ class LoanApplicationService:
         Submit application for review. Trigger async credit check
         """
 
+        from apps.loans.tasks import (
+            run_credit_check_task,
+            send_application_submitted_notification,
+        )
+
         if application.applicant != submitted_by:
             raise InsufficientPermissions(
                 "Only the applicant can submit this application"
@@ -94,3 +100,13 @@ class LoanApplicationService:
             )
 
         cls._assert_required_documents(application)
+
+        application.status = LoanApplication.Status.SUBMITTED
+        application.submitted_at = timezone.now()
+        application.save(update_fields=["status", "submitted_at", "updated_at"])
+
+        # fire async tasks
+        run_credit_check_task.apply_async(
+            args=[str(application.id)],
+            queue="high_priority",
+        )
