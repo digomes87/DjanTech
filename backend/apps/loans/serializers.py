@@ -2,7 +2,6 @@
 Serializers
 """
 
-"""DRF Serializers for Loan Application."""
 from decimal import Decimal
 
 from apps.accounts.serializers import UserSummarySerializer

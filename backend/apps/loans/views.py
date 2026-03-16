@@ -1,5 +1,4 @@
 import logging
-from os import truncate
 
 from apps.loans.repository import LoanRepository
 from apps.loans.serializers import (
